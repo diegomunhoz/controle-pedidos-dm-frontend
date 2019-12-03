@@ -1,3 +1,25 @@
 page-home {
-
+    h1 {
+        text-align: center;
+        background-color: #58ACFA;
+        color: #FFFFFF;
+        padding: 10px;
+    }
+    .button-entar {
+        background-color: #58ACFA;
+    }
+    .logo-inicial {
+        width: 100%;
+        align-self: center;
+        margin: auto;
+        display: block;
+        padding: 10px;
+    }
+    .img-inicial {
+        width: 200px;
+        align-self: center;
+        margin: auto;
+        display: block;
+        padding: 10px;
+    }
 }
