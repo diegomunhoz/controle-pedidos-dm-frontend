@@ -25,7 +25,6 @@ export class HomePage {
   login() {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
-        //console.log(response.headers.get('Authorization'))
         this.auth.successfulLogin(response.headers.get('Authorization'))
         this.navCtrl.setRoot('CategoriasPage')
       },
@@ -40,4 +39,12 @@ export class HomePage {
     this.menu.swipeEnable(false);
   }
 
+  ionViewDidEnter() {
+    this.auth.refreshToken()
+    .subscribe(response => {
+      this.auth.successfulLogin(response.headers.get('Authorization'))
+      this.navCtrl.setRoot('CategoriasPage')
+    },
+    error => {})
+  }
 }
