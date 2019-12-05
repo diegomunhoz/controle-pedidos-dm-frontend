@@ -31,6 +31,10 @@ export class HomePage {
       error => {})
   }
 
+  signup() {
+    this.navCtrl.push('SignupPage')
+  }
+
   ionViewDidLeave() {
     this.menu.swipeEnable(true);
   }
@@ -47,4 +51,5 @@ export class HomePage {
     },
     error => {})
   }
+
 }
