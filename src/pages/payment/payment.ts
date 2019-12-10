@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PedidoDTO } from '../../models/pedido.dto';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -19,7 +19,10 @@ export class PaymentPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder,
+    public loadingCtrl: LoadingController) {
+
+      let loader = this.presentLoading()
 
       this.pedido = this.navParams.get('pedido')
 
@@ -27,11 +30,21 @@ export class PaymentPage {
         numeroDeParcelas: [1, Validators.required],
         "@type": ["pagamentoComCartao", Validators.required]
       })
+
+      loader.dismiss()
   }
 
   nextPage() {
     this.pedido.pagamento = this.formGroup.value
     this.navCtrl.setRoot('OrderConfirmationPage', {pedido: this.pedido})
+  }
+
+  private presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

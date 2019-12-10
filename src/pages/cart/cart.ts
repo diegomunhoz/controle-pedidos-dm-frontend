@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CartItem } from '../../models/cart-item';
 import { ProdutoService } from '../../services/domain/produto.service';
 import { API_CONFIG } from '../../config/api.config';
@@ -19,13 +19,16 @@ export class CartPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public cartService: CartService,
-    public produtoService: ProdutoService) {
+    public produtoService: ProdutoService,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
+    let loader = this.presentLoading()
     let cart = this.cartService.getCart()
     this.items = cart.items
     this.loadImageUrls()
+    loader.dismiss()
   }
 
   loadImageUrls() {
@@ -61,6 +64,14 @@ export class CartPage {
 
   checkout() {
     this.navCtrl.push('PickAddressPage');
+  }
+
+  private presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }
