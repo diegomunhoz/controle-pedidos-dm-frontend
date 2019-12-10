@@ -4,7 +4,7 @@ export interface EnderecoDTO {
   id: string
   logradouro: string
   numero: string
-  complemente: string
+  complemento: string
   bairro: string
   cep: string
   cidade: CidadeDTO
